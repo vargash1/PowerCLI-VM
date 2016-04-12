@@ -14,16 +14,16 @@ def read(fname):
     return open(os.path.join(os.path.dirname(__file__), fname)).read()
 
 setup(
-    name = "powercliVM",
+    name = "vpowercli",
     version = "2.0.0",
     author = "Hector Vargas",
     author_email = "vargash1@wit.edu",
-    description = ("powercliVM"),
+    description = ("vpowercli"),
     license = "MIT",
     url = "https://github.com/vargash1/PowerCLI-VM",
-    packages = ['powercliVM'],
-    package_dir = {'powercli':'powercli'},
-    package_data = {'powercli': ['data/*.ps1']},
+    packages = ['vpowercli'],
+    package_dir = {'vpowercli':'vpowercli'},
+    package_data = {'vpowercli': ['data/*.ps1']},
     long_description = read('README.md'),
     # entry_points = {
     # 'console_scripts': [
