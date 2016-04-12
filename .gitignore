@@ -1,0 +1,7 @@
+vpowercli.egg-info/*
+build/*
+dist/*
+*.pyc
+*.pdf
+.env
+*.jpg
