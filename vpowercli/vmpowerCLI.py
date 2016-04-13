@@ -4,7 +4,7 @@
 # @Date:   Tuesday, April 12th 2016, 3:47:16 pm
 # @Email:  vargash1@wit.edu
 # @Last modified by:   vargash1
-# @Last modified time: Wednesday, April 13th 2016, 11:01:20 am
+# @Last modified time: Wednesday, April 13th 2016, 11:03:42 am
 import os
 import sys
 import curses
@@ -34,12 +34,13 @@ class VMPowerCLI:
             status = self.getKeystroke()
             if status == "submit":
                 break
-            if status == "end":
+            elif status == "end":
                 sys.exit("User has exited ncurses")
                 break
             else:
                 continue
         curses.endwin()
+        self.powershellTemplate()
 
     """
     Formats a menu onto the terminal screen
@@ -75,7 +76,6 @@ class VMPowerCLI:
         if useropt == ord('2'):
             return "submit"
         if useropt == ord('4'):
-            self.powershellTemplate()
             return "submit"
         if useropt == ord('5'):
             return "end"
