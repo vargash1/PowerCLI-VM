@@ -4,7 +4,7 @@
 # @Date:   Tuesday, April 12th 2016, 3:47:16 pm
 # @Email:  vargash1@wit.edu
 # @Last modified by:   vargash1
-# @Last modified time: Wednesday, April 13th 2016, 11:03:42 am
+# @Last modified time: Wednesday, April 13th 2016, 11:05:06 am
 import os
 import sys
 import curses
@@ -83,8 +83,8 @@ class VMPowerCLI:
     def powershellTemplate(self):
         scriptpath = os.path.join(os.path.dirname(__file__),"data","launchvm.ps1")
         print scriptpath
-        scriptcall = subprocess.Popen(["powershell.exe",scriptpath], stdout = sys.stdout)
-        scriptcall.communicate()
+        retval = subprocess.call(["powershell.exe",scriptpath])
+        print retval
 
 
 def main():
