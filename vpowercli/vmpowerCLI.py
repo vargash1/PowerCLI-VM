@@ -4,10 +4,11 @@
 # @Date:   Tuesday, April 12th 2016, 3:47:16 pm
 # @Email:  vargash1@wit.edu
 # @Last modified by:   vargash1
-# @Last modified time: Wednesday, April 13th 2016, 10:44:55 am
+# @Last modified time: Wednesday, April 13th 2016, 10:54:49 am
 import os
 import sys
 import curses
+import subprocess
 from curses import wrapper
 
 class VMPowerCLI:
@@ -51,7 +52,7 @@ class VMPowerCLI:
         self.stdscr.addstr(4, 4, "1 - Configure(Such as IP, OS, Storage Size, Host Name)")
     	self.stdscr.addstr(5, 4, "2 - Launch VM")
     	self.stdscr.addstr(6, 4, "3 - Show current Configuration")
-        self.stdscr.addstr(7, 4, "4 - Deploy by template")
+        self.stdscr.addstr(7, 4, "4 - Deploy by predefined template")
         self.stdscr.addstr(8, 4, "5 - Exit")
         self.stdscr.refresh()
 
@@ -74,9 +75,17 @@ class VMPowerCLI:
         if useropt == ord('2'):
             return "submit"
         if useropt == ord('4'):
-            return "end"
+            self.powershellTemplate()
+            return "submit"
         if useropt == ord('5'):
             return "end"
+
+    def powershellTemplate(self):
+        scriptpath = os.path.join(os.path.dirname(__file__),"data","launchvm.ps1")
+        scriptcall = subprocess.Popen(["powershell.exe",scriptpath], stdout = sys.stdout)
+        scriptcall.communicate()
+
+
 def main():
     print os.getcwd()
     test = VMPowerCLI()

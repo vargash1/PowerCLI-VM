@@ -1,4 +1,4 @@
-$vm =  @('Test2', 'powercli', 'h2.teame.witcsn.net', 'datastore1')
+$vm =  @('TestX', 'powercli', 'h2.teame.witcsn.net', 'datastore1')
 $Template = Get-Template $vm[1]
 $VMHost = Get-VMHost $vm[2]
 $Datastore = Get-Datastore $vm[3]
