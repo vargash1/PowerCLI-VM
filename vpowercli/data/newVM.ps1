@@ -6,4 +6,4 @@ $vmname = Read-Host -Prompt 'Input your new vm name'
 $hostname = Read-Host -Prompt 'Input hostname'
 $datastorename = Read-Host -Prompt 'Input the datastore to use'
 
-New-VM -Name $vmname -Template 'powercli' -VMHost $VMHost -Datastore $Datastore -RunAsync
+New-VM -Name $vmname -Template 'powercli' -VMHost $hostname -Datastore $datastorename -RunAsync
