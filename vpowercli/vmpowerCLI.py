@@ -4,7 +4,7 @@
 # @Date:   Tuesday, April 12th 2016, 3:47:16 pm
 # @Email:  vargash1@wit.edu
 # @Last modified by:   vargash1
-# @Last modified time: Wednesday, April 13th 2016, 10:44:06 am
+# @Last modified time: Wednesday, April 13th 2016, 10:44:55 am
 import os
 import sys
 import curses
@@ -78,9 +78,10 @@ class VMPowerCLI:
         if useropt == ord('5'):
             return "end"
 def main():
+    print os.getcwd()
     test = VMPowerCLI()
     test.initCurses()
-    print os.getcwd()
+
 
 
 
