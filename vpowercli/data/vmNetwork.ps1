@@ -11,18 +11,5 @@ $newnetmask = '255.255.255.240'
 $newgateway = '69.43.73.209'
 $ndns = '69.43.73.211'
 
-$specName = "tempSpec" + (Get-Random)
-Get-OSCustomizationSpec -Name "Window"| New-OSCustomizationSpec -Name $specName -Type NonPersistent
-
-Get-OSCustomizationSpec -Name $specName | Get-OSCustomizationNicMapping | Set-OSCustomizationNicMapping `
--IpMode UseStaticIP -IpAddress $newip -SubnetMask $newnetmask -DefaultGateway $newgateway -Dns $ndns
-
-$tempSpec = Get-OSCustomizationSpec -Name $specName
-
-$vmhost = (Get-Cluster | Get-VMHost | Sort-Object -Property MemoryUsageGB | Select-Object -First 1)
-
-#Create the `VM
-New-VM -Name $vmname -OSCustomizationSpec $tempSpec -VMHost $hostname -Confirm:$true
-
-#Cleanup the temporary Spec. System will do this outside of the session, but this will allow the scripts to be reused within a session.
-Remove-OSCustomizationSpec -Confirm:$false -customizationSpec (Get-OSCustomizationSpec -name $specName)
+$powershellsucks = Get-VMGuestNetworkInterface -VM $vmname
+Set-VMGuestNetworkInterface -VMGuestNetworkInterface $vmGuestNetworkInterface -HostUser Admin -HostPassword Pass01 -GuestUser User -GuestPassword Pass02 -Netmask $newnetmask -Gateway $newgateway -Ip $newip
