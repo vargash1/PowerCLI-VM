@@ -12,4 +12,5 @@ $newgateway = '69.43.73.209'
 $ndns = '69.43.73.211'
 
 $powershellsucks = Get-VMGuestNetworkInterface -VM $vmname
-Set-VMGuestNetworkInterface -VMGuestNetworkInterface $vmGuestNetworkInterface -HostUser Admin -HostPassword Pass01 -GuestUser User -GuestPassword Pass02 -Netmask $newnetmask -Gateway $newgateway -Ip $newip
+New-VM -Name $vmname -Template 'powercli' -VMHost $hostname -Datastore $datastorename -RunAsync
+Set-VMGuestNetworkInterface -VMGuestNetworkInterface $powershellsucks -HostUser Admin -HostPassword Pass01 -GuestUser User -GuestPassword Pass02 -Netmask $newnetmask -Gateway $newgateway -Ip $newip
