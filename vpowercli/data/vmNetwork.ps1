@@ -12,5 +12,5 @@ $newgateway = '69.43.73.209'
 $ndns = '69.43.73.211'
 $vmnetinterface = Get-VMGuestNetworkInterface -VM $config
 
-Set-OSCustomizationNicMapping -IpMode UseStaticIp -IpAddress $newip -SubnetMask $newnetmask  -DefaultGateway $newgateway -Dns $ndns
-New-VM -Name $vmname -Template 'powercli' -VMHost $hostname -Datastore $datastorename -RunAsync
+Get-OSCustomizationSpec $customspecfile | Get-OSCustomizationNicMapping | Set-OSCustomizationNicMapping -IpMode UseStaticIp -IpAddress $newip -SubnetMask $newnetmask  -DefaultGateway $newgateway -Dns $ndns
+New-VM -Name $vmname -Template 'powercli' -VMHost $hostname -Datastore $datastorename -RunAsync -OSCustomizationSpec $customspecfile
