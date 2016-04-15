@@ -12,6 +12,18 @@ $newgateway = '69.43.73.209'
 $ndns = '69.43.73.211'
 $vmnetinterface = Get-VMGuestNetworkInterface -VM $config
 
-$customspecfile  = New-OSCustomizationSpec –Name 'Wiseman' –FullName 'wisemanE' –OrgName 'TEAME' –Domain 'teame.witcsn.net' –DomainUsername 'user' –DomainPassword 'pass'
-Get-OSCustomizationSpec $customspecfile | Get-OSCustomizationNicMapping | Set-OSCustomizationNicMapping -IpMode UseStaticIp -IpAddress $newip -SubnetMask $newnetmask  -DefaultGateway $newgateway -Dns $ndns
-New-VM -Name $vmname -Template 'powercli' -VMHost $hostname -Datastore $datastorename -RunAsync -OSCustomizationSpec $customspecfile
+$specName = "tempSpec" + (Get-Random)
+Get-OSCustomizationSpec -Name $spec | New-OSCustomizationSpec -Name $specName -Type NonPersistent
+
+Get-OSCustomizationSpec -Name $specName | Get-OSCustomizationNicMapping | Set-OSCustomizationNicMapping `
+-IpMode UseStaticIP -IpAddress $newip -SubnetMask $newnetmask -DefaultGateway $newgateway -Dns $ndns
+
+$tempSpec = Get-OSCustomizationSpec -Name $specName
+
+$vmhost = (Get-Cluster | Get-VMHost | Sort-Object -Property MemoryUsageGB | Select-Object -First 1)
+
+#Create the VM
+New-VM -Name $vmname -template $template -OsCustomizationSpec $tempSpec -VMHost $hostname -Confirm:$true
+
+#Cleanup the temporary Spec. System will do this outside of the session, but this will allow the scripts to be reused within a session.
+Remove-OSCustomizationSpec -Confirm:$false -customizationSpec (Get-OSCustomizationSpec -name $specName)
