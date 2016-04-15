@@ -22,7 +22,7 @@ $tempSpec = Get-OSCustomizationSpec -Name $specName
 $vmhost = (Get-Cluster | Get-VMHost | Sort-Object -Property MemoryUsageGB | Select-Object -First 1)
 
 #Create the `VM
-New-VM -Name $vmname -template $template -OsCustomizationSpec $tempSpec -VMHost $hostname -Confirm:$true
+New-VM -Name $vmname -OSCustomizationSpec $tempSpec -VMHost $hostname -Confirm:$true
 
 #Cleanup the temporary Spec. System will do this outside of the session, but this will allow the scripts to be reused within a session.
 Remove-OSCustomizationSpec -Confirm:$false -customizationSpec (Get-OSCustomizationSpec -name $specName)
