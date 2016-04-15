@@ -5,7 +5,6 @@ Connect-VIServer -Server vc.teame.witcsn.net -Protocol https -User 'Administrato
 $vmname = Read-Host -Prompt 'Input the new vm name that you wish to spawn'
 $hostname = Read-Host -Prompt 'Enter the host(h2,h3,h4)'
 $datastorename = Read-Host -Prompt 'Enter the datastore to use'
-$vmconfig = Get-VM -Name $vmname
 
 $newip = Read-Host -Prompt 'Input new ip for vm'
 $newnetmask = '255.255.255.240'
